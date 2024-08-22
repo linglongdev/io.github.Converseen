@@ -1,0 +1,37 @@
+version: "1"
+
+package: 
+  id: io.github.Converseen
+  name: Converseen
+  version: 0.12.2.3
+  kind: app
+  description: |
+    Converseen is a batch image converter and resizer
+
+command:
+  - /opt/apps/io.github.Converseen/files/bin/converseen
+
+base: org.deepin.foundation/23.0.0.27
+runtime: org.deepin.Runtime/23.0.1
+
+sources:
+  - kind: git
+    url: https://github.com/Faster3ck/Converseen.git
+    commit: 6b512fbc3eff1e433c8d2d8368b8b9c1c26fd1d4
+  - kind: git
+    url: https://github.com/ImageMagick/ImageMagick.git
+    commit: bc3df5d42dbb7952b427d5d77a44bbca942a56ac
+ 
+
+build: | 
+  cd /project/linglong/sources/ImageMagick.git
+  ./configure --prefix=${PREFIX} --exec-prefix=${PREFIX}
+  make 
+  make install
+  
+  cd /project/linglong/sources/Converseen.git
+  git apply /project/linglong/sources/0001-fix-prefix.patch
+  qmake converseen.pro IM_INSTALL_PREFIX=${PREFIX} PREFIX=${PREFIX} LIB_INSTALL_DIR=${PREFIX}/lib/${TRIPLET}
+  make
+  make install
+
