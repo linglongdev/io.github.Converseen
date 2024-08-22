@@ -1,0 +1,34 @@
+From 818034535c23f9795b220d5362e8699d6c372330 Mon Sep 17 00:00:00 2001
+From: Shenyufan <751890223@qq.com>
+Date: Thu, 18 Jul 2024 17:14:42 +0800
+Subject: [PATCH] fix-prefix
+
+---
+ converseen.pro | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/converseen.pro b/converseen.pro
+index c85620d..f212607 100755
+--- a/converseen.pro
++++ b/converseen.pro
+@@ -133,7 +133,7 @@ win32 {
+  loc/converseen_zh_CN.ts
+  
+  RESOURCES +=  resources.qrc
+- INSTALL_PREFIX =  /usr
++ INSTALL_PREFIX =  $$PREFIX
+  target.path =  $${INSTALL_PREFIX}/bin
+  SHARE_DIR =  $${INSTALL_PREFIX}/share
+  translations.path = $${SHARE_DIR}/converseen/loc
+@@ -171,7 +171,7 @@ win32 {
+  desktopFile.files = res/converseen.desktop
+  kdeservicemenu.path = $${SHARE_DIR}/kio/servicemenus
+  kdeservicemenu.files = res/converseen_import.desktop
+- appdata.path = /usr/share/appdata/
++ appdata.path = $$PREFIX/share/appdata/
+  appdata.files = converseen.appdata.xml
+ 
+  isEmpty(QMAKE_LRELEASE) {
+-- 
+2.43.4
+
